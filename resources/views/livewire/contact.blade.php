@@ -81,7 +81,125 @@
                 </thead>
                 </tbody>
             </table>
-            <button wire:click="save">Save</button>
+
+            <button wire:click="save" class="btn btn-success">Save</button>
+
+            @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+            @endif
+
+
+            @if (session()->has('error-message'))
+            <div class="alert alert-danger">
+                {{ session('error-message') }}
+            </div>
+            @endif
+
+            <div class="table-responsive mt-5">
+                <table class="table table-sm">
+                    <thead>
+                        <tr class="bg-light">
+                            <th scope="col" width="20%">Title</th>
+                            <th scope="col" width="20%">First Name</th>
+                            <th scope="col" width="20%">Last Name</th>
+                            <th scope="col" width="20%">Mobile Number</th>
+                            <th scope="col" width="20%">Company Name</th>
+                            <th scope="col" width="20%">Option</th>
+                        </tr>
+
+                        @foreach ($contacts as $contact)
+                        <tr class="bg-light">
+                            <th scope="col" width="20%">{{ $contact->title }}</th>
+                            <th scope="col" width="20%">{{ $contact->first_name }}</th>
+                            <th scope="col" width="20%">{{ $contact->last_name }}</th>
+                            <th scope="col" width="20%">{{ $contact->mobile_number }}</th>
+                            <th scope="col" width="20%">{{ $contact->company_name }}</th>
+                            <th scope="col" width="20%"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button></th>
+                            <th scope="col" width="20%"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"">Delete</button></th>
+                            </tr>
+
+                            <div class=" modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Contact</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row g-3 align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="inputPassword6" class="col-form-label">Title</label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input type="text" class="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row g-3 align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="inputPassword6" class="col-form-label">First Name</label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input type="text" class="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row g-3 align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="inputPassword6" class="col-form-label">Last Name</label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input type="text" class="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row g-3 align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="inputPassword6" class="col-form-label">Mobile Number</label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input type="text" class="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row g-3 align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="inputPassword6" class="col-form-label">Company Name</label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input type="text" class="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+            </div>
+
+            <div class=" modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Contact</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+
+            </thead>
+            </tbody>
+            </table>
 
         </div>
     </div>

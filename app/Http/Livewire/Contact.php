@@ -9,6 +9,8 @@ use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Psr\Log\LoggerInterface;
 
 class Contact extends Component
 {
@@ -16,6 +18,8 @@ class Contact extends Component
     use WithFileUploads;
 
     public $excel_file;
+
+    public $contacts;
 
     public $column_header_title;
     public $column_header_first_name;
@@ -30,22 +34,27 @@ class Contact extends Component
         $this->column_header_last_name = 'last_name';
         $this->column_header_mobile_number = 'mobile_number';
         $this->column_header_company_name = 'company_name';
+
+        $this->contacts = \App\Models\Contact::all();
     }
 
 
     public function save()
     {
         try {
-            
             $data = $this->parseData();
             DB::beginTransaction();
-
             \App\Models\Contact::insert($data);
 
             DB::commit();
+            session()->flash('message', 'Successfully saved!');
+            $this->contacts = \App\Models\Contact::all();
+            
         } catch (\Throwable $th) {
-            info("Psr\Log\LoggerInterface::error`, pass `['offset' => $offset]");
+            session()->flash('error-message', 'Error! Please see the log file!');
+            Log::error($th->getMessage());
             DB::rollBack();
+
         }
       
     }
@@ -54,7 +63,7 @@ class Contact extends Component
     {   
         $data = Excel::toCollection(new ContactImports(), $this->excel_file->store('contacts'));
 
-        $data = $data->all()[1];
+        $data = $data->all()[0];
         $data->shift();
         $data = $data->map(function ($row) {
 
