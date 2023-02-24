@@ -116,91 +116,103 @@
                             <th scope="col" width="20%">{{ $contact->last_name }}</th>
                             <th scope="col" width="20%">{{ $contact->mobile_number }}</th>
                             <th scope="col" width="20%">{{ $contact->company_name }}</th>
-                            <th scope="col" width="20%"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button></th>
-                            <th scope="col" width="20%"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"">Delete</button></th>
-                            </tr>
+                            <th scope="col" width="20%"><button type="button" class="btn btn-warning" data-bs-toggle="modal" wire:click="findContact({{$contact->id}})" data-bs-target="#updateModal{{ $contact->id }}">Update</button></th>
+                            <th scope="col" width="20%"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=" #deleteModal{{$contact->id}}">Delete</button></th>
+                        </tr>
 
-                            <div class=" modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Contact</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class=" modal fade" id="updateModal{{$contact->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Contact</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <label for="inputPassword6" class="col-form-label">Title</label>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-auto">
-                                                        <label for="inputPassword6" class="col-form-label">Title</label>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" class="text">
-                                                    </div>
-                                                </div>
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-auto">
-                                                        <label for="inputPassword6" class="col-form-label">First Name</label>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" class="text">
-                                                    </div>
-                                                </div>
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-auto">
-                                                        <label for="inputPassword6" class="col-form-label">Last Name</label>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" class="text">
-                                                    </div>
-                                                </div>
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-auto">
-                                                        <label for="inputPassword6" class="col-form-label">Mobile Number</label>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" class="text">
-                                                    </div>
-                                                </div>
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-auto">
-                                                        <label for="inputPassword6" class="col-form-label">Company Name</label>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <input type="text" class="text">
-                                                    </div>
-                                                </div>
+                                            <div class="col-auto">
+                                                <input type="text" model:wire="title_update_text" class="text">
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <label for="inputPassword6" class="col-form-label">First Name</label>
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="text" value="{{$contact->first_name}}" class="text">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <label for="inputPassword6" class="col-form-label">Last Name</label>
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="text" value="{{$contact->last_name}}" class="text">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <label for="inputPassword6" class="col-form-label">Mobile Number</label>
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="text" value="{{$contact->mobile_number}}" class="text">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-auto">
+                                                <label for="inputPassword6" class="col-form-label">Company Name</label>
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="text" value="{{$contact->company_name}}" class="text">
                                             </div>
                                         </div>
                                     </div>
-            </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" wire:click="updateContact({{ $contact->id }}, '{{ $contact->title }}', '{{ $contact->first_name }}',)" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class=" modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Contact</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class=" modal fade" id="deleteModal{{$contact->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Contact</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete {{$contact->title}} {{$contact->first_name}}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" wire:click="deleteContact({{$contact->id}})" class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Delete</button>
-                        </div>
-                    </div>
+
+                        @endforeach
+
+                    </thead>
+                    </tbody>
+                </table>
+
+                @if (session()->has('table-message'))
+                <div class="alert alert-success">
+                    {{ session('table-message') }}
                 </div>
+                @endif
+
+                @if (session()->has('error-table-message'))
+                <div class="alert alert-danger">
+                    {{ session('error-table-message') }}
+                </div>
+                @endif
+
             </div>
-
-            @endforeach
-
-            </thead>
-            </tbody>
-            </table>
-
         </div>
     </div>
-</div>

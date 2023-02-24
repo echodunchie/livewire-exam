@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "a3b4fac5-24d3-4b34-ac36-b423bec58098",
+		"name": "Laravel API Exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14048708"
+	},
+	"item": [
+		{
+			"name": "Authenticated Requests",
+			"item": [
+				{
+					"name": "Display Contacts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|1rkE1BUeU2Aqt7noDT9Pgifn74xLLXWdaG8rvw9E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|1rkE1BUeU2Aqt7noDT9Pgifn74xLLXWdaG8rvw9E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Mr.",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Moniksa",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Yahoo",
+									"type": "text"
+								},
+								{
+									"key": "mobile_number",
+									"value": "09154151241",
+									"type": "text"
+								},
+								{
+									"key": "company_name",
+									"value": "The basic coffee",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|kEURWbXTZ5P4Sy5g4ppcvLzey07PjfawRhj0PYs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/contacts/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|kEURWbXTZ5P4Sy5g4ppcvLzey07PjfawRhj0PYs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Mr.",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Yayyyyyyy",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Yahoo",
+									"type": "text"
+								},
+								{
+									"key": "mobile_number",
+									"value": "09154151241",
+									"type": "text"
+								},
+								{
+									"key": "company_name",
+									"value": "The basic coffee",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/contacts/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|kEURWbXTZ5P4Sy5g4ppcvLzey07PjfawRhj0PYs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/contacts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|1rkE1BUeU2Aqt7noDT9Pgifn74xLLXWdaG8rvw9E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jerico",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "echodunchie@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "1213345",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password_confirmation",
+									"value": "1213345",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register Account",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Jerico",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "echodunchie@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1213345",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "1213345",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Account",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Jerico",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "echodunchie@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1213345",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "1213345",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

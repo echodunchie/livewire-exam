@@ -17,5 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('upload/csv', \App\Http\Livewire\UploadCsv::class);
 
