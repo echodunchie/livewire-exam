@@ -116,7 +116,7 @@
                             <th scope="col" width="20%">{{ $contact->last_name }}</th>
                             <th scope="col" width="20%">{{ $contact->mobile_number }}</th>
                             <th scope="col" width="20%">{{ $contact->company_name }}</th>
-                            <th scope="col" width="20%"><button type="button" class="btn btn-warning" data-bs-toggle="modal" wire:click="findContact({{$contact->id}})" data-bs-target="#updateModal{{ $contact->id }}">Update</button></th>
+                            <th scope="col" width="20%"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{ $contact->id }}">Update</button></th>
                             <th scope="col" width="20%"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=" #deleteModal{{$contact->id}}">Delete</button></th>
                         </tr>
 
@@ -133,7 +133,7 @@
                                                 <label for="inputPassword6" class="col-form-label">Title</label>
                                             </div>
                                             <div class="col-auto">
-                                                <input type="text" model:wire="title_update_text" class="text">
+                                                <input type="text" value="{{$contact->title}}" class="text">
                                             </div>
                                         </div>
                                         <div class="row g-3 align-items-center">

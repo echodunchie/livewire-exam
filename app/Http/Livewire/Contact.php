@@ -110,15 +110,6 @@ class Contact extends Component
 
         try {
           
-            dd($id, $title, $fname);
-            // $contact->update([
-            //     'title' => $this->title_update_text ,
-            //     'first_name' => $this->first_name_update_text,
-            //     'last_name' => $this->last_name_update_text,
-            //     'mobile_number' => $this->mobile_number_update_text,
-            //     'company_name' => $this->company_name_update_text
-            // ]);
-
             $this->contacts = ContactModel::all();
 
             DB::commit();
