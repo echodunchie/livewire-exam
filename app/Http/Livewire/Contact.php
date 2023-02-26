@@ -19,7 +19,9 @@ class Contact extends Component
 
     public $excel_file;
 
-    public $contacts; 
+    public $contacts;
+
+    public $contacts_update; 
     
     public $column_header_title;
     
@@ -41,6 +43,10 @@ class Contact extends Component
 
     public $company_name_update_text;
 
+    public $search;
+
+    protected $queryString = ['search'];
+
     public function mount()
     {
         $this->column_header_title = 'title';
@@ -49,10 +55,22 @@ class Contact extends Component
         $this->column_header_mobile_number = 'mobile_number';
         $this->column_header_company_name = 'company_name';
 
-        $this->contacts = ContactModel::all();
+        $this->refreshTable(); 
     }
 
-    public function save()
+    
+    public function querySearch()
+    {
+        $this->contacts = ContactModel::where('title', 'like', '%' . $this->search . '%')
+        ->orWhere('first_name', 'like', '%' . $this->search . '%')
+        ->orWhere('last_name', 'like', '%' . $this->search . '%')
+        ->orWhere('mobile_number', 'like', '%' . $this->search . '%')
+        ->orWhere('company_name', 'like', '%' . $this->search . '%')
+        ->get();
+    }
+
+
+    public function saveContact()
     {
         try {
             
@@ -73,10 +91,9 @@ class Contact extends Component
             ContactModel::insert($data);
 
             DB::commit();
-            
-            $this->contacts = ContactModel::all();
 
-            session()->flash('message', 'Contacts was successfully imported!');
+            $this->refreshTable();
+            session()->flash('message', 'Contacts has successfully imported!');
             
             
         } catch (\Throwable $th) {
@@ -90,31 +107,38 @@ class Contact extends Component
       
     }
 
+
     public function findContact($id)
     {
         $contact = ContactModel::find($id);
 
         $this->title_update_text = $contact->title;
+        $this->first_name_update_text = $contact->first_name;
+        $this->last_name_update_text = $contact->last_name;
+        $this->mobile_number_update_text = $contact->mobile_number;
+        $this->company_name_update_text = $contact->company_name;
 
-        // HELP TO RENDER TEXTFIELDS
-
-
-        // dd($this->title_update_text);
-
-        // $this->first_name_update_text = $contact->first_name;
+        $this->dispatchBrowserEvent('show-edit-form');
     }
 
 
-    public function updateContact($id, $title, $fname)
+    public function updateContact($id)
     {
-
         try {
-          
-            $this->contacts = ContactModel::all();
 
             DB::commit();
 
-            session()->flash('table-message', 'Contact has been updated!');
+            ContactModel::where('id', $id)->update([
+                'title' => $this->title_update_text,
+                'first_name' => $this->first_name_update_text,
+                'last_name' => $this->last_name_update_text,
+                'mobile_number' => $this->mobile_number_update_text,
+                'company_name' => $this->company_name_update_text
+            ]);
+
+            $this->refreshTable();
+            session()->flash('table-message', 'Contact has successfuly updated!');
+
         } catch (\Throwable $th) {
             DB::rollBack();
 
@@ -133,11 +157,10 @@ class Contact extends Component
 
             ContactModel::destroy($id);
   
-            $this->contacts = ContactModel::all();
-
             DB::commit();
 
-            session()->flash('table-message', 'Contact has been removed!');
+            $this->refreshTable();
+            session()->flash('table-message', 'Contact has successfully removed!');
 
         } catch(\Throwable $th){
             DB::rollBack();
@@ -149,8 +172,18 @@ class Contact extends Component
       
     }
 
+
     public function render()
     {
-        return view('livewire.contact');
+        return view('livewire.contact',[
+            'contacts' => ContactModel::where('title', 'like', '%' . $this->search . '%')->get()
+        ]);
     }
+
+    // private methods
+
+    private function refreshTable(){
+        $this->contacts = ContactModel::all();
+    }
+
 }
